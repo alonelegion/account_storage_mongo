@@ -1,2 +1,9 @@
-# account_storage_mongo
-My account storage in MongoDB
+# Онлайн хранилище информации аккаунтов
+
+Стек технологий:
+  
+  Golang
+  MongoDB
+  
+
+To be continued ...
