@@ -3,8 +3,10 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"github.com/alonelegion/account_storage_mongo/config"
 	"github.com/alonelegion/account_storage_mongo/helper"
 	"github.com/alonelegion/account_storage_mongo/models"
+	"github.com/gin-gonic/gin"
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -13,13 +15,17 @@ import (
 )
 
 func main() {
-	route := mux.NewRouter()
 
-	route.HandleFunc("/api/accounts", getAccounts).Methods("GET")
-	route.HandleFunc("/api/accounts/{id}", getAccount).Methods("GET")
-	route.HandleFunc("/api/accounts", createAccount).Methods("POST")
-	route.HandleFunc("/api/accounts/{id}", updateAccount).Methods("PUT")
-	route.HandleFunc("/api/accounts/{id}", deleteAccount).Methods("DELETE")
+	// Database
+	config.Connect()
+
+	// Init Router
+	router := gin.Default()
+
+	// Route Handlers / Endpoints
+	routes
+
+	route := mux.NewRouter()
 
 	log.Fatal(http.ListenAndServe(":8080", route))
 }

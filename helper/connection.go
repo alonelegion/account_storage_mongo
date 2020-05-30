@@ -19,7 +19,8 @@ func ConnectDB() *mongo.Collection {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Connection to MongoDB!")
+	const connectMessage = "Connection to MongoDB!"
+	fmt.Println(connectMessage)
 
 	collection := client.Database("account-list").Collection("accounts")
 
