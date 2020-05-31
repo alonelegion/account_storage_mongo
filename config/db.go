@@ -13,7 +13,7 @@ import (
 func Connect() {
 
 	// Database config
-	clientOptions := options.Client().ApplyURI("mongodb+srv://admin:zw345b7u@account-list-jqhzr.mongodb.net/test?retryWrites=true&w=majority")
+	clientOptions := options.Client().ApplyURI("your-mongo-link")
 
 	client, err := mongo.NewClient(clientOptions)
 
