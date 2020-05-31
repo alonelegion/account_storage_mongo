@@ -1,17 +1,18 @@
 package routes
 
 import (
+	"github.com/alonelegion/account_storage_mongo/controllers"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
 func Routes(router *gin.Engine) {
 	router.GET("/", welcome)
-	router.GET("/api/accounts", getAccounts).Methods("GET")
-	router.GET("/api/accounts/{id}", getAccount).Methods("GET")
-	router.HandleFunc("/api/accounts", createAccount).Methods("POST")
-	router.HandleFunc("/api/accounts/{id}", updateAccount).Methods("PUT")
-	router.HandleFunc("/api/accounts/{id}", deleteAccount).Methods("DELETE")
+	router.GET("/accounts", controllers.GetAllAccounts)
+	router.POST("/account", controllers.CreateAccount)
+	router.GET("/account/:accountId", controllers.GetAccount)
+	router.PUT("/account/:accountId", controllers.EditAccount)
+	router.DELETE("/account/:accountId", controllers.DeleteAccount)
 	router.NoRoute(notFound)
 }
 
