@@ -3,23 +3,24 @@ package controllers
 import (
 	"context"
 	"github.com/gin-gonic/gin"
+	getuid "github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"log"
 	"net/http"
 )
 
 type Account struct {
-	ID           primitive.ObjectID `json:"id"`
-	Title        string             `json:"title"`
-	Login        string             `json:"login"`
-	Password     string             `json:"password"`
-	Email        string             `json:"email"`
-	Phone        int                `json:"phone"`
-	ReserveEmail string             `json:"reserve_email"`
-	Owner        string             `json:"owner"`
-	Notice       string             `json:"notice"`
+	ID           string `json:"id,omitempty" bson:"id,omitempty"`
+	Title        string `json:"title,omitempty" bson:"title,omitempty"`
+	Login        string `json:"login,omitempty" bson:"login,omitempty"`
+	Password     string `json:"password,omitempty" bson:"password,omitempty"`
+	Site         string `json:"site,omitempty" bson:"site,omitempty"`
+	Email        string `json:"email,omitempty" bson:"email,omitempty"`
+	Phone        int    `json:"phone,omitempty" bson:"phone,omitempty"`
+	ReserveEmail string `json:"reserve_email,omitempty" bson:"reserve_email,omitempty"`
+	Owner        string `json:"owner,omitempty" bson:"owner,omitempty"`
+	Notice       string `json:"notice,omitempty" bson:"notice,omitempty"`
 }
 
 // Database instance
@@ -69,18 +70,22 @@ func CreateAccount(c *gin.Context) {
 
 	c.BindJSON(&account)
 
+	id := getuid.New().String()
 	title := account.Title
 	login := account.Login
 	password := account.Password
+	site := account.Site
 	email := account.Email
 	phone := account.Phone
 	reserve_email := account.ReserveEmail
 	owner := account.Owner
 	notice := account.Notice
 	newAccount := Account{
+		ID:           id,
 		Title:        title,
 		Login:        login,
 		Password:     password,
+		Site:         site,
 		Email:        email,
 		Phone:        phone,
 		ReserveEmail: reserve_email,
