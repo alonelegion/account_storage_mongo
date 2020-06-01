@@ -3,7 +3,6 @@ package config
 import (
 	"context"
 	"github.com/alonelegion/account_storage_mongo/controllers"
-	"github.com/alonelegion/account_storage_mongo/utils"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -13,10 +12,8 @@ import (
 
 func Connect() {
 
-	connectionString := utils.EnvVar("DB_CONNECTION_STRING")
-
 	// Database config
-	clientOptions := options.Client().ApplyURI(connectionString)
+	clientOptions := options.Client().ApplyURI("mongodb+srv://admin:zw345b7u@account-list-jqhzr.mongodb.net/test?retryWrites=true&w=majority")
 
 	client, err := mongo.NewClient(clientOptions)
 
