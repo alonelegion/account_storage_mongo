@@ -2,8 +2,10 @@
 
 Стек технологий:
   
-  Golang
-  MongoDB
-  
+Golang
 
+MongoDB
+
+Angular/Vue/React ?
+  
 To be continued ...
