@@ -36,7 +36,7 @@ func Connect() {
 	}
 
 	// Create the database called *account_mongo_go*
-	db := client.Database("account_mongo_go")
+	db := client.Database("account-list")
 
 	controllers.AccountCollection(db)
 
