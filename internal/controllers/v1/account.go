@@ -1,4 +1,4 @@
-package controllers
+package v1
 
 import (
 	"context"
@@ -9,6 +9,8 @@ import (
 	"log"
 	"net/http"
 )
+
+type AccountController struct{}
 
 type Account struct {
 	ID           string `json:"id,omitempty" bson:"id,omitempty"`
@@ -30,7 +32,7 @@ func AccountCollection(c *mongo.Database) {
 	collection = c.Collection("accounts")
 }
 
-func GetAllAccounts(c *gin.Context) {
+func (ac AccountController) GetAllAccounts(c *gin.Context) {
 	accounts := []Account{}
 
 	cursor, err := collection.Find(context.TODO(), bson.M{})
@@ -65,7 +67,7 @@ func GetAllAccounts(c *gin.Context) {
 	return
 }
 
-func CreateAccount(c *gin.Context) {
+func (ac AccountController) CreateAccount(c *gin.Context) {
 	var account Account
 
 	c.BindJSON(&account)
@@ -114,7 +116,7 @@ func CreateAccount(c *gin.Context) {
 	return
 }
 
-func GetAccount(c *gin.Context) {
+func (ac AccountController) GetAccount(c *gin.Context) {
 	accountId := c.Param("accountId")
 
 	account := Account{}
@@ -144,7 +146,7 @@ func GetAccount(c *gin.Context) {
 	return
 }
 
-func EditAccount(c *gin.Context) {
+func (ac AccountController) EditAccount(c *gin.Context) {
 	accountId := c.Param("accountId")
 	var account Account
 	c.BindJSON(&account)
@@ -194,7 +196,7 @@ func EditAccount(c *gin.Context) {
 	return
 }
 
-func DeleteAccount(c *gin.Context) {
+func (ac AccountController) DeleteAccount(c *gin.Context) {
 	accountId := c.Param("accountId")
 
 	_, err := collection.DeleteOne(context.TODO(), bson.M{"id": accountId})
